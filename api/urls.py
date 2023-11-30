@@ -4,7 +4,7 @@ from .views import home
 
 urlpatterns =[
     path('', home, name='api.home'),
-    # path('event/',include('api.event.urls')),
+    path('chehra/',include('api.chehra.urls')),
     # path('user/',include('api.user.urls')),
     # path('booking/',include('api.booking.urls')),
     
