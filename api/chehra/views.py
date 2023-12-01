@@ -9,12 +9,15 @@ import numpy as np
 from PIL import Image 
 from django.views.decorators.csrf import csrf_exempt
 
-def my_custom_sql(request):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM embeddings")
-        row = cursor.fetchall()
+from api.chehra.db import DBOperations
 
-    return JsonResponse({"row": row})
+def my_custom_sql(request):
+    # with connection.cursor() as cursor:
+    #     cursor.execute("insert into embeddingsStorage (id, name, embedding) values (100, 'check', '[1, 2, 3]');")
+    #     # row = cursor.fetchall()
+    db = DBOperations("embeddingsStorage")
+    row = db.insert({"id":'18165053', "name":'yash', "embeddings":'[0, 0, 0]'})
+    return JsonResponse({"row": "row"})
 
 class URLs(Enum):
     DETECTOR_URL = "https://127.0.0.1:5001/predict/"
