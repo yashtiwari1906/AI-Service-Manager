@@ -62,13 +62,16 @@ class RegisterFace:
 
         return embedding
 
-    def push_embeddings_to_db(self):
-        pass 
+    def push_embeddings_to_db(self, embedding):
+        id, name = 1, "howard"
+        db = DBOperations("embeddingStore")
+        column_value_dict = {"id": id, "name": name, "embedding": str(embedding)}
+        res = db.insert(column_value_dict)
+        return res
 
     def register(self, request):
-        print(request.POST.get("file"))
-        if 'file' not in request.FILES:
-            return 'No file part'
+        # if 'file' not in request.FILES:
+        #     return 'No file part'
         
         file = request.FILES['file']
         
@@ -80,7 +83,7 @@ class RegisterFace:
         
         face_frame = self.crop_face_from_frame(image)
         embedding = self.get_face_embeddings(face_frame) 
-
+        res = self.push_embeddings_to_db(embedding[0])
         return JsonResponse({"success": True, "msg": "face saved successfully..."})
         
 

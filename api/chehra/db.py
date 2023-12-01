@@ -25,7 +25,7 @@ class DBOperations:
             # try:
             with connection.cursor() as cursor:
                 cursor.execute(query_str)
-            return True
+            return {"success": True, "msg": "Embeddings saved successfully."}
             # except:
             #     return False 
 
