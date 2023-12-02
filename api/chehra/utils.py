@@ -9,7 +9,10 @@ class UniqueIdGenerator:
         with connection.cursor() as cursor:
             cursor.execute(query)
             row = cursor.fetchone()
-        return int(row[0])
+        if row is not None:
+            return int(row[0])
+        else:
+            return 0
 
     def last_uuid_saved(self): 
         return self.generate_uuid_for_vectorStorage()

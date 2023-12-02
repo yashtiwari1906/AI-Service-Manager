@@ -72,8 +72,8 @@ class RegisterFace(FaceOperations):
 	def preprocess_image(self, image):
 		pass 
 
-	def push_embeddings_to_db(self, embedding):
-		id, name = ChehraStartupHandler.get_curr_instance().curr_uuid, "ran"  #if you'll not put get_curr_instance then a new instance will be created 
+	def push_embeddings_to_db(self, embedding, name):
+		id = ChehraStartupHandler.get_curr_instance().get_curr_uuid()  #if you'll not put get_curr_instance then a new instance will be created 
 		db = DBOperations("embeddingStore")
 		column_value_dict = {"id": id, "name": name, "embedding": str(embedding)}
 		res = db.insert(column_value_dict)
@@ -84,7 +84,7 @@ class RegisterFace(FaceOperations):
 		#     return 'No file part'
 		
 		file = request.FILES['file']
-		
+		name = request.POST.get("name", "unknown")
 		img = Image.open(file).convert('RGB')
 		image = np.array(img)
 	
@@ -97,8 +97,8 @@ class RegisterFace(FaceOperations):
 			
 		face_frame = cv2.cvtColor(face_frame, cv2.COLOR_BGR2RGB) 
 		embedding = self.get_face_embeddings(face_frame) 
-		res = self.push_embeddings_to_db(embedding[0])
-		return JsonResponse({"success": True, "msg": "face saved successfully..."})
+		res = self.push_embeddings_to_db(embedding[0], name)
+		return JsonResponse({"success": True, "msg": f"face saved successfully for identity {name}"})
 		
 
 class VerifyFace(FaceOperations):

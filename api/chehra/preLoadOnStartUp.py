@@ -9,10 +9,10 @@ class ChehraStartupHandler:
         # self.initialize_uuid_generator()
         self.curr_uuid = 0
 
-    # @classmethod
-    # def initialize_uuid_generator(cls):
-    #     table = "embeddingStore"
-    #     cls.uuid_generator = UniqueIdGenerator(table)
+    @classmethod
+    def get_curr_uuid(cls):
+        cls.instance.curr_uuid+=1
+        return cls.instance.curr_uuid
 
     @staticmethod
     def get_curr_instance():
