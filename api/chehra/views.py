@@ -93,7 +93,8 @@ class RegisterFace(FaceOperations):
 		face_frame = self.crop_face_from_frame(image)
 		if face_frame is None:
 			return JsonResponse({"success": False, "msg": "Multiple faces detected in the frame..."})
-
+			
+		face_frame = cv2.cvtColor(face_frame, cv2.COLOR_BGR2RGB) 
 		embedding = self.get_face_embeddings(face_frame) 
 		res = self.push_embeddings_to_db(embedding[0])
 		return JsonResponse({"success": True, "msg": "face saved successfully..."})
@@ -142,7 +143,7 @@ class VerifyFace(FaceOperations):
 		if face_frame is None:
 			self.verification_validation_passed = False 
 			return 
-
+		face_frame = cv2.cvtColor(face_frame, cv2.COLOR_BGR2RGB) 
 		self.embedding = self.get_face_embeddings(face_frame)[0]
 		return
 
