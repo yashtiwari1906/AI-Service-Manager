@@ -43,3 +43,9 @@ class DBOperations:
                 row = cursor.fetchall()
         
         return row 
+
+    def similarity_search_retireval(self, query):
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            rows = cursor.fetchall()
+        return rows
