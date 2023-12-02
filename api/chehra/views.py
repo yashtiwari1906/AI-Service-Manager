@@ -11,6 +11,7 @@ from PIL import Image
 from django.views.decorators.csrf import csrf_exempt
 from time import gmtime, strftime
 from api.chehra.db import DBOperations
+from api.chehra.preLoadOnStartUp import ChehraStartupHandler
 
 def my_custom_sql(request):
 	# with connection.cursor() as cursor:
@@ -72,7 +73,7 @@ class RegisterFace(FaceOperations):
 		pass 
 
 	def push_embeddings_to_db(self, embedding):
-		id, name = 6, "ran"
+		id, name = ChehraStartupHandler.get_curr_instance().curr_uuid, "ran"  #if you'll not put get_curr_instance then a new instance will be created 
 		db = DBOperations("embeddingStore")
 		column_value_dict = {"id": id, "name": name, "embedding": str(embedding)}
 		res = db.insert(column_value_dict)
@@ -139,7 +140,7 @@ class VerifyFace(FaceOperations):
 			
 
 	def set_embedding(self, image):
-		face_frame = self.crop_face_from_frame(image, save_image_with_bbox=True)
+		face_frame = self.crop_face_from_frame(image, save_image_with_bbox=False)
 		if face_frame is None:
 			self.verification_validation_passed = False 
 			return 
