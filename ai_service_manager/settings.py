@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'ai_service_manager.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "vectorStorage",
+        "NAME": "postgres",
         "USER": "user1",
         "PASSWORD": "1234",
-        "HOST": "127.0.0.1",
+        "HOST": "pgvector-db",
         "PORT": "5432",
     }
 }
