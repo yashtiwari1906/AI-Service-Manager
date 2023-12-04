@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a(kauv^m955+wg+2s8_ru9m6nyj9)h!=q5w6$ghh*o7h(ocqv0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0"]
 
 
 # Application definition
@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'ai_service_manager.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "vectorStorage",
+        "NAME": "postgres",
         "USER": "user1",
         "PASSWORD": "1234",
-        "HOST": "127.0.0.1",
+        "HOST": "pgvector-db",
         "PORT": "5432",
     }
 }
