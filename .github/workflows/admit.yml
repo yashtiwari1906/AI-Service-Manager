@@ -1,0 +1,38 @@
+name: Python Code Quality Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*.py'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt  # Adjust as per your project setup
+
+      # - name: Check for linting issues
+      #   run: |
+      #     # Add any linting or code quality checks here
+      #     pylint . --rcfile=.pylintrc
+      #     flake8 .
+
+      - name: Check for commented code
+        run: |
+          # Ensure there's not a large amount of commented code
+          COMMENT_THRESHOLD=100
+          COMMENT_COUNT=$(grep -c '^#' -R .)
+          if [ "$COMMENT_COUNT" -gt "$COMMENT_THRESHOLD" ]; then
+            echo "Too much commented code found. Please review before merging."
+            exit 1
+          fi
