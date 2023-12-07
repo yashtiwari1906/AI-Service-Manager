@@ -1,0 +1,37 @@
+version: '0'
+
+services:
+  # pgvector-db:
+  #   image: ankane/pgvector
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - network1
+  #   environment:
+  #     POSTGRES_PASSWORD: test@123
+
+  service_manager:
+    image: dracarys2000/service-manager:v1.0
+    ports:
+      - "5050:5050"
+    networks:
+      - network1
+    external_links:
+      - "pgvector-db: pgvector"
+
+  detector:
+    image: dracarys2000/face-detector:v1.1
+    ports:
+      - "5001:5001"
+    networks:
+      - network1
+
+  verifier:
+    image: dracarys2000/face-verifier:v1.1
+    ports:
+      - "4001:4001"
+    networks:
+      - network1
+
+networks:
+  network1:
