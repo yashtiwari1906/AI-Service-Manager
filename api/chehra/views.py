@@ -28,8 +28,8 @@ def my_custom_sql(request):
 
 class FaceOperations:
 	def __init__(self) -> None:
-		self.detector_url = "http://172.18.0.3:5001/predict"
-		self.verifier_url = "http://172.18.0.2:4001/predict"
+		self.detector_url = "http://docker_installation-detector-1:5001/predict"
+		self.verifier_url = "http://docker_installation-verifier-1:4001/predict"
 	
 	def crop_face_from_frame(self, image, save_image_with_bbox=False):
 		
