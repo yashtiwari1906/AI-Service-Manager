@@ -84,7 +84,7 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "user1",
         "PASSWORD": "1234",
-        "HOST": "localhost",
+        "HOST": "pgvector-db",
         "PORT": "5432",
     }
 }
