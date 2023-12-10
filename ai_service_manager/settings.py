@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from ai_service_manager.config.constants import DataBaseConfig
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-a(kauv^m955+wg+2s8_ru9m6nyj9)h!=q5w6$ghh*o7h(ocqv0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1"]
 
 
 # Application definition
@@ -81,11 +83,11 @@ WSGI_APPLICATION = 'ai_service_manager.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "user1",
-        "PASSWORD": "1234",
-        "HOST": "pgvector-db",
-        "PORT": "5432",
+        "NAME": DataBaseConfig.NAME.value,
+        "USER": DataBaseConfig.USER.value,
+        "PASSWORD": DataBaseConfig.PASSWORD.value,
+        "HOST": DataBaseConfig.HOST.value,
+        "PORT": DataBaseConfig.PORT.value,
     }
 }
 

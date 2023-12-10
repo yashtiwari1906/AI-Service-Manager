@@ -10,6 +10,7 @@ import numpy as np
 from PIL import Image 
 from django.views.decorators.csrf import csrf_exempt
 from time import gmtime, strftime
+from ai_service_manager.config.constants import URLConfig
 from api.chehra.db import DBOperations
 from api.chehra.preLoadOnStartUp import ChehraStartupHandler
 
@@ -28,8 +29,8 @@ def my_custom_sql(request):
 
 class FaceOperations:
 	def __init__(self) -> None:
-		self.detector_url = "http://detector:5001/predict"
-		self.verifier_url = "http://verifier:4001/predict"
+		self.detector_url = URLConfig.DETECTOR_URL.value
+		self.verifier_url = URLConfig.VERIFIER_URL.value
 	
 	def crop_face_from_frame(self, image, save_image_with_bbox=False):
 		
