@@ -1,0 +1,22 @@
+version: '0'
+
+services:
+  detector:
+    image: dracarys2000/face-detector:v1.1
+    container_name: detector
+    ports:
+      - "5001:5001"
+    networks:
+      - network1
+
+  verifier:
+    image: dracarys2000/face-verifier:v1.1
+    container_name: verifier
+    ports:
+      - "4001:4001"
+    networks:
+      - network1
+
+networks:
+  network1:
+    name: network1
