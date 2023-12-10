@@ -16,7 +16,7 @@
 
 
 ### :star2: About
-- IRYWAT is a platform which is ready to deploy server where you don't have to care much about how you manager traffic and request flow you just need to focus on building you AI microservice and this will provide a communication layer to that AI service
+- IRYWAT is a platform which is ready to deploy server where you don't have to care much about how you manager traffic and request flow you just need to focus on building your AI microservice and this will provide a communication layer to that AI service
 - This is container based so host your models somehere in this world and bring it's IP and perform the business or any other cool logics with IRYWAT
 
 
@@ -26,8 +26,7 @@
 - [Demo](#movie_camera-Demo)
 - [Set Up](#outbox_tray-Set-up)
 - [Contribute](#building_construction-Contribute)
-- [Deployment](#rocket-Deployment)
-- [File Structure](#file_folder-File-Structure)
+- [Deployment](#rocket-Deployment)  <!-- - [File Structure](#file_folder-File-Structure) -->
 - [Roadmap](#bicyclist-Roadmap)
 - [FAQ](#thinking-FAQ)
 - [License](#page_facing_up-License)
@@ -52,42 +51,68 @@ $~$
 - These are the steps required to install the project.
 - I have built this project on Ubuntu OS but I've not tried installing it in other OS but in that case you can go forward with docker installation.
 
-_E.g_
+## Prerequisites
+- Docker
+- Python >= 3.8
 
 ## DataBase setup
-    - This is a critical step as whole project is based upon this DB installation 
+- This is a critical step as whole project is based upon this DB installation 
     - `docker network create -d bridge network1`
     - `docker pull ankane/pgvector`
     - `docker run --name pgvector-db -e POSTGRES_PASSWORD=test@123 -p 5432:5432 --network network1 ankane/pgvector`
 
-    Here your DB image is pulled and you container will be up and running with username postgres and password test@123 Now you need to configure it.
-
-    - go to shell_scripts/db_setup/ and start this bash script configure_db.sh by 
+- Here your DB image is pulled and your container will be up and running with username postgres and password test@123 Now you need to configure it.
+- go to shell_scripts/db_setup/ and start this bash script configure_db.sh by 
     - `chmod +x ./configure_db.sh`
     - `./configure_db.sh` 
 
-    Congratulations!!! your DB is ready you also connect this DB with pgAdmin to run custom queries.
+- Congratulations!!! your DB is ready, you can also connect this DB with pgAdmin to run custom queries.
 
 ## Docker installation 
-    - Now just be in this directory and type one magic command to turn the server on 
+- Now just be in this directory(root) and type one magic command to turn the server on 
     - `docker-compose up`
 
-    that's it Now you can hit the detector and verifier APIs and take the feel of this powerfull system
+- that's it Now you can hit the detector and verifier APIs and take the feel of this powerfull system
  
 ## Local installation
-1. Get a API Key at [website](example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/YOUR_USERNAME/Project-Name.git
+   git clone https://github.com/yashtiwari1906/AI-Service-Manager.git
    ```
-3. Install NPM packages
+2. ```sh
+    cd AI-Service-Manager
+    ```
+2. Install dependancies
    ```sh
-   npm install npm@latest -g
+   pip install -r requirements.txt
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'YOUR API KEY HERE';
+3. go to prequisites/detector_verifier_servers/ in another terminal and hit following command to switch on the servers for detector and verifier
+   ```sh
+   docker-compose up
    ```
+4. Now your detector is up at (127.0.0.1:5001/predict) & verifier is up at (127.0.0.1:4001/predict) for predictions you can use https://drive.google.com/file/d/1-5jFNU1p6IkZnRuUXuf0hpqCTLyRIe8L/view?usp=sharing  dummy payload to check them individually
+
+5. Now get back to the main terminal and export an environment variable ENV
+    ```sh
+    export ENV=local
+    ```
+6. Now hit the main server by 
+    ```sh
+    python manage.py runserver
+    ```
+7. Now you can try this by hitting registration folder for registration of face and verification folder for verification of the face under the ai_service_manager folder in the postman collection attached in this repo
+
+### Request & Reponses
+    - you can find postman collection at https://drive.google.com/file/d/15sDPYq4CAaT1pdMViJRhbQXqHPOOjOwV/view?usp=sharing where the request and response are documented
+    - but as per general information:
+    - if running system from local ip for this server will be 127.0.0.1:8000 otherwise 0.0.0.0:5050 
+    two APIs are exposed in this system right now 
+        - Registration: 
+            - {ip}/api/chehra/register-face/
+            - where you need to provide an image file in the request along with name of the face which you want to register
+        - Verification:
+            - {ip}/api/chehra/verify-face/
+            - here you only need to provide an image 
 
 $~$
 
@@ -252,9 +277,8 @@ $~$
 
 
 ### :email: Contact 
-- Email and social media links.
-- Head over to [here](https://github.com/alexandresanlim/Badges4-README.md-Profile#-social-)
-  * Copy paste the social links you enjoy and drop them below (make sure to change the `href` to your own links
+- email: yashtiwari.engineer@gmail.com
+- website: https://theyashtiwari.com 
 
 <p align="left">
 <a href="https://twitter.com/yash_tiwar_i" target="blank"><img align="center" src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="fernandezbap" /></a>
