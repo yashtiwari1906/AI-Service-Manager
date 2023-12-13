@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verifier-deployment
+  labels:
+    app: verifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: verifier
+  template:
+    metadata:
+      labels:
+        app: verifier
+    spec:
+      containers:
+      - name: verifier
+        image: dracarys2000/face-verifier:v1.1
+        ports:
+        - containerPort: 4001
+        # env:
+        # - name: USER_NAME
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: mongo-secret
+        #       key: mongo-user
+        # - name: USER_PWD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: mongo-secret
+        #       key: mongo-password 
+        # - name: DB_URL
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: mongo-config
+        #       key: mongo-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: verifier-service
+spec:
+  type: NodePort
+  selector:
+    app: verifier
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4001
+      nodePort: 30111
