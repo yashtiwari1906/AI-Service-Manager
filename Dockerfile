@@ -5,7 +5,7 @@ EXPOSE 8000
 WORKDIR /app/ 
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-ENV ENV="production"
+ENV ENV="minikube"
 RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y  && pip install --upgrade pip && pip install -r requirements.txt
 CMD ["python",  "manage.py", "runserver", "0.0.0.0:5050"] 
