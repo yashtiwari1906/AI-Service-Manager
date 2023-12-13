@@ -7,6 +7,8 @@ try:
     #     from .staging import *
     elif os.environ.get("ENV") == 'local':
         from . import local as env
+    elif os.environ.get("ENV") == 'minikube':
+        from . import minikube as env
     else:
         raise RuntimeError("wrong value of ENV variable should be in [production, local]")
 except Exception as e:
