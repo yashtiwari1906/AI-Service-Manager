@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: service-manager
-        image: dracarys2000/service-manager:v1.1
+        image: dracarys2000/service-manager:v1.0
         ports:
         - containerPort: 5050
         imagePullPolicy: Always
