@@ -37,11 +37,14 @@ class FaceOperations:
 		headers = {
 		'Content-Type': 'application/json'
 		}
-		payload = json.dumps({"image_array": image.tolist()})
-		response = requests.request("POST", self.detector_url, headers=headers, data=payload)
 
+		payload_dict = {"inputs": [{"name": "image", "shape": image.shape, "datatype":"INT32", "data": image.tolist()}]}
+		payload = json.dumps(payload_dict)
+		response = requests.request("POST", self.detector_url, headers=headers, data=payload)
+		if response is None:
+			print(f"couldn't able to fetch response from detector.")
 		res_dict = response.json()
-		coordinates = res_dict["coordianates"]
+		coordinates = res_dict["outputs"][0]["data"]  #0 since we are providing only single image 
 		if len(coordinates)>1:
 			return None 
 		p1, p2 = coordinates[0][0], coordinates[0][1]
