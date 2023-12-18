@@ -20,7 +20,12 @@ spec:
         ports:
         - containerPort: 5050
         imagePullPolicy: Always
-        # env:
+        env:
+        - name: NGROK_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: service-manager-config
+              key: ngrok-port
         # - name: USER_NAME
         #   valueFrom:
         #     secretKeyRef:
@@ -31,11 +36,7 @@ spec:
         #     secretKeyRef:
         #       name: mongo-secret
         #       key: mongo-password 
-        # - name: DB_URL
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: mongo-config
-        #       key: mongo-url
+        
 ---
 apiVersion: v1
 kind: Service
