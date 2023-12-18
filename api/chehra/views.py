@@ -60,12 +60,15 @@ class FaceOperations:
 		headers = {
 		'Content-Type': 'application/json'
 		}
-		payload = json.dumps({"image_array": face_fame.tolist()})
+		payload_dict = {"inputs": [{"name": "image", "shape": face_fame.shape, "datatype":"INT32", "data": face_fame.tolist()}]}
+		payload = json.dumps(payload_dict)
 		response = requests.request("POST", self.verifier_url, headers=headers, data=payload)
+		if response is None:
+			print(f"couldn't able to fetch response from detector.")
 
 		res_dict = response.json()
-		embedding = res_dict["embedding"]
-
+		embedding = res_dict["outputs"][0]["data"]
+		print(len(embedding))
 		return embedding
 	
 
@@ -101,7 +104,7 @@ class RegisterFace(FaceOperations):
 			
 		face_frame = cv2.cvtColor(face_frame, cv2.COLOR_BGR2RGB) 
 		embedding = self.get_face_embeddings(face_frame) 
-		res = self.push_embeddings_to_db(embedding[0], name)
+		res = self.push_embeddings_to_db(embedding, name)
 		return JsonResponse({"success": True, "msg": f"face saved successfully for identity {name}"})
 		
 
@@ -149,7 +152,7 @@ class VerifyFace(FaceOperations):
 			self.verification_validation_passed = False 
 			return 
 		face_frame = cv2.cvtColor(face_frame, cv2.COLOR_BGR2RGB) 
-		self.embedding = self.get_face_embeddings(face_frame)[0]
+		self.embedding = self.get_face_embeddings(face_frame)
 		return
 
 	def verify(self, request):
