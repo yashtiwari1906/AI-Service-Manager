@@ -22,20 +22,10 @@ spec:
         imagePullPolicy: Always
         env:
         - name: NGROK_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: service-manager-config
-              key: ngrok-port
-        # - name: USER_NAME
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: mongo-secret
-        #       key: mongo-user
-        # - name: USER_PWD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: mongo-secret
-        #       key: mongo-password 
+          value: 11985
+        
+
+          
         
 ---
 apiVersion: v1

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: service-manager-config
 data:
-  ngrok-port: 11720
+  ngrok-port: 10480
