@@ -22,11 +22,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: NGROK_PORT
-          value: 11985
-        
-
-          
-        
+          value: "11985"     
 ---
 apiVersion: v1
 kind: Service
