@@ -72,6 +72,10 @@ $~$
 - Now just be in this directory(root) and type one magic command to turn the server on 
     - `docker-compose up`
 
+- In case want to run this application only(not detector & verifier) through docker container then firstly expose your port 5432 to internet using ngrok on which your postgres vectorDB is running then make image of this from dockerfile and then run the container with following commands
+    - `docker build -t <name-for-image(foreg: service_manager)> .`
+    - `docker run -p 5050:5050 --rm --name <name-for-container> -e NGROK_PORT=<ngrok-port> <name-of-image(foreg: service_manager)>`
+
 - that's it Now you can hit the detector and verifier APIs and take the feel of this powerfull system
  
 ## Local installation
