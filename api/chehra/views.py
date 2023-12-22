@@ -38,13 +38,12 @@ class FaceOperations:
 		'Content-Type': 'application/json'
 		}
 
-		payload_dict = {"inputs": [{"name": "image", "shape": image.shape, "datatype":"INT32", "data": image.tolist()}]}
-		payload = json.dumps(payload_dict)
+		payload = json.dumps({"image_array": image.tolist()})
 		response = requests.request("POST", self.detector_url, headers=headers, data=payload)
 		if response is None:
 			print(f"couldn't able to fetch response from detector.")
 		res_dict = response.json()
-		coordinates = res_dict["outputs"][0]["data"]  #0 since we are providing only single image 
+		coordinates = res_dict["coordianates"]  
 		if len(coordinates)>1:
 			return None 
 		p1, p2 = coordinates[0][0], coordinates[0][1]
@@ -60,15 +59,13 @@ class FaceOperations:
 		headers = {
 		'Content-Type': 'application/json'
 		}
-		payload_dict = {"inputs": [{"name": "image", "shape": face_fame.shape, "datatype":"INT32", "data": face_fame.tolist()}]}
-		payload = json.dumps(payload_dict)
+		payload = json.dumps({"image_array": face_fame.tolist()})
 		response = requests.request("POST", self.verifier_url, headers=headers, data=payload)
 		if response is None:
 			print(f"couldn't able to fetch response from detector.")
 
 		res_dict = response.json()
-		embedding = res_dict["outputs"][0]["data"]
-		print(len(embedding))
+		embedding = res_dict["embedding"][0]
 		return embedding
 	
 
