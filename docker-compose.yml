@@ -19,6 +19,8 @@ services:
       - network1
     external_links:
       - "pgvector-db: pgvector"
+    environment:
+      - NGROK_PORT=5432
 
   detector:
     image: dracarys2000/face-detector:v1.1
