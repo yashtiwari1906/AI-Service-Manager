@@ -24,7 +24,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: dracarys2000/celery-ASM-worker
+          images: dracarys2000/celery-asm-worker
       
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -32,5 +32,5 @@ jobs:
           context: docker/.
           file: docker/async_consumer.Dockerfile
           push: true
-          tags: dracarys2000/celery-ASM-worker:v1.0
+          tags: dracarys2000/celery-asm-worker:v1.0
           labels: ${{ steps.meta.outputs.labels }}

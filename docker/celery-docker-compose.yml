@@ -18,12 +18,12 @@ services:
       - network1
 
   celery_worker:
-    image: dracarys2000/celery-ASM-worker:v1.0
+    image: dracarys2000/celery-asm-worker:v1.0
     networks:
       - network1
     depends_on:
       - redis_message_broker 
-      
+
   service_manager:
     image: dracarys2000/service-manager:v1.1
     container_name: service-manager
