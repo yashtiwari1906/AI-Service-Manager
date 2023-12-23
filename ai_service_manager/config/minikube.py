@@ -7,3 +7,10 @@ USER="user1"
 PASSWORD = 1234
 HOST = "0.tcp.in.ngrok.io"
 PORT = os.environ.get("NGROK_PORT")  #this port keeps changing in ngrok
+# Celery settings
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL") 
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND") 
+
+#email settings
+EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS") 
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD") 
