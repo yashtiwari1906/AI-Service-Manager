@@ -23,6 +23,10 @@ services:
       - network1
     depends_on:
       - redis_message_broker 
+    environment:
+      - NGROK_PORT=5432
+      - CELERY_BROKER_URL=redis://redis_message_broker:6379
+      - CELERY_RESULT_BACKEND=redis://redis_message_broker:6379
 
   service_manager:
     image: dracarys2000/service-manager:v1.1
@@ -36,7 +40,9 @@ services:
     depends_on:
       - redis_message_broker 
     environment:
-      - NGROK_PORT=5432
+      - NGROK_PORT=15432
+      - CELERY_BROKER_URL=redis://redis_message_broker:6379
+      - CELERY_RESULT_BACKEND=redis://redis_message_broker:6379
 
   detector:
     image: dracarys2000/face-detector:v1.1
