@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Publish celery worker Docker image
 
 on:
   push:
