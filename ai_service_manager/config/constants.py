@@ -27,3 +27,7 @@ class URLConfig(Enum):
     DETECTOR_URL = env.detector_url
     VERIFIER_URL = env.verifier_url
 
+class CelereySettings(Enum):
+    CELERY_BROKER_URL = env.CELERY_BROKER_URL
+    CELERY_RESULT_BACKEND = env.CELERY_RESULT_BACKEND
+
