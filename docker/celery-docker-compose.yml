@@ -1,0 +1,59 @@
+version: '0'
+
+services:
+  # pgvector-db:
+  #   image: ankane/pgvector
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - network1
+  #   environment:
+  #     POSTGRES_PASSWORD: test@123
+  redis_message_broker:
+    image: redis:6.2-alpine
+    container_name: redis-message-broker
+    ports:
+      - "6379:6379"
+    networks:
+      - network1
+
+  celery_worker:
+    image: dracarys2000/celery-ASM-worker:v1.0
+    networks:
+      - network1
+    depends_on:
+      - redis_message_broker 
+      
+  service_manager:
+    image: dracarys2000/service-manager:v1.1
+    container_name: service-manager
+    ports:
+      - "5050:5050"
+    networks:
+      - network1
+    external_links:
+      - "pgvector-db: pgvector"
+    depends_on:
+      - redis_message_broker 
+    environment:
+      - NGROK_PORT=5432
+
+  detector:
+    image: dracarys2000/face-detector:v1.1
+    container_name: detector
+    ports:
+      - "5001:5001"
+    networks:
+      - network1
+
+  verifier:
+    image: dracarys2000/face-verifier:v1.1
+    container_name: verifier
+    ports:
+      - "4001:4001"
+    networks:
+      - network1
+
+networks:
+  network1:
+    name: network1
