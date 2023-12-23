@@ -1,5 +1,6 @@
 from enum import Enum
-import os 
+import os
+
 try:
     if os.environ.get("ENV") == 'production':
         from . import production as env
@@ -31,3 +32,6 @@ class CelereySettings(Enum):
     CELERY_BROKER_URL = env.CELERY_BROKER_URL
     CELERY_RESULT_BACKEND = env.CELERY_RESULT_BACKEND
 
+class EmailConfig(Enum):
+    EMAIL_ADDRESS = env.EMAIL_ADDRESS
+    EMAIL_PASSWORD = env.EMAIL_PASSWORD

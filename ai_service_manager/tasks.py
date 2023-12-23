@@ -5,6 +5,8 @@ from celery import shared_task
 import smtplib
 from email.message import EmailMessage
 
+from ai_service_manager.config.constants import EmailConfig
+
 def return_html(msg):
     html = """
 
@@ -24,10 +26,8 @@ def return_html(msg):
     return html
 
 def send_email(title, message, email):
-    with open("api/user/documents/credentials.json", "r") as json_file: 
-        email_credential_dict = json.load(json_file)
-    EMAIL_ADDRESS = email_credential_dict["email_address"]
-    EMAIL_PASSWORD = email_credential_dict["password"]
+    EMAIL_ADDRESS = EmailConfig.EMAIL_ADDRESS.value
+    EMAIL_PASSWORD = EmailConfig.EMAIL_PASSWORD.value
     msg = EmailMessage()
     msg['Subject'] = title
     msg['From'] = EMAIL_ADDRESS
@@ -61,7 +61,7 @@ def send_feedback_email_task(msg):
     # """
 
     try:
-        sleep(20)  
+        send_email("hurray!!!","message successful", "yash.tiwari@cars24.com")
         print("Successfully sent email")
     except Exception as e:
         print("Error: unable to send email", e)

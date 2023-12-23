@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from dotenv import load_dotenv
 from api.chehra.preLoadOnStartUp import ChehraStartupHandler, return_last_uuid_from_db
 
 
@@ -23,6 +23,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     load_on_startup()
+    load_dotenv()
     execute_from_command_line(sys.argv)
 
     
