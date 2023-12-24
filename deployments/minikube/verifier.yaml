@@ -46,6 +46,6 @@ spec:
     app: verifier
   ports:
     - protocol: TCP
-      port: 4000
+      port: 4001
       targetPort: 4001
       nodePort: 30111

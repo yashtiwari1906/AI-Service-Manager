@@ -1,7 +1,7 @@
 import os 
 
-detector_url = "http://detector-service:5000/predict"  #in kubernetes we use port of service which is connected to the pod where are container is running 
-verifier_url = "http://verifier-service:4000/predict" 
+detector_url = "http://detector-service:5001/predict"  #in kubernetes we use port of service which is connected to the pod where are container is running 
+verifier_url = "http://verifier-service:4001/predict" 
 NAME = "postgres"
 USER="user1"
 PASSWORD = 1234

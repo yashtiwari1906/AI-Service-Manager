@@ -59,7 +59,7 @@ $~$
 - This is a critical step as whole project is based upon this DB installation 
     - `docker network create -d bridge network1`
     - `docker pull ankane/pgvector`
-    - `docker run --name pgvector-db -e POSTGRES_PASSWORD=test@123 -p 5432:5432 --network network1 ankane/pgvector`
+    - `docker run --name pgvector-db --rm -e POSTGRES_PASSWORD=test@123 -p 5432:5432 --network network1 ankane/pgvector`
 
 - Here your DB image is pulled and your container will be up and running with username postgres and password test@123 Now you need to configure it.
 - go to shell_scripts/db_setup/ and start this bash script configure_db.sh by 
@@ -173,6 +173,12 @@ $~$
 
 ### :rocket: Deployment
 - you can go in the deployment folder to find the deployment file for the kubernetes deployment of the project.
+- Install minikube first and then just deploy every deployment file in it by:
+    `kubectl apply -f <file_name.yaml>`
+- Then type `minikube ip` this will be your IP and `31111` will be your port which is the nodeport for service-manager-service
+- so url in cluster based environment will be `http://<minikube_ip>:31111`
+- One thing to remember when your'e estabilishihng the communication between multiple pods try to make sure your'e calling with port not with targetPort or containerPort
+- In GKE cluster you've to deploy these `NodePort` as `LoadBalancer` so that you'll have an external IP and you'll call it through `port` not targetPort or NodePort
 
 $~$
 
