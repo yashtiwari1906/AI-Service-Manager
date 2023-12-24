@@ -1,30 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-manager-deployment
+  name: async-worker-deployment
   labels:
-    app: service-manager
+    app: async-worker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: service-manager
+      app: async-worker
   template:
     metadata:
       labels:
-        app: service-manager
+        app: async-worker
     spec:
       containers:
-      
-      - name: service-manager
-        image: dracarys2000/service-manager:v1.1
+  
+      - name: async-worker
+        image: dracarys2000/celery-asm-worker:v1.0
         ports:
-        - containerPort: 5050
+        - containerPort: 5055
         imagePullPolicy: Always
         env:
-        env:
         - name: NGROK_PORT
-          value: "17712"  
+          value: "<port>"  
         - name: CELERY_BROKER_URL
           value: "redis://redis-message-broker-service:6379"  
         - name: CELERY_RESULT_BACKEND
@@ -32,19 +31,19 @@ spec:
         - name: EMAIL_ADDRESS
           value: "<email-address>"  
         - name: EMAIL_PASSWORD
-          value: "<email-password>"  
+          value: "<email-password>"        
         
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-manager-service
+  name: async-worker-service
 spec:
   type: NodePort
   selector:
-    app: service-manager
+    app: async-worker
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 5050
-      nodePort: 31111
+      port: 3001
+      targetPort: 6379
+      nodePort: 30001

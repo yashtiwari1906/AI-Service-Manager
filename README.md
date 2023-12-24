@@ -59,7 +59,7 @@ $~$
 - This is a critical step as whole project is based upon this DB installation 
     - `docker network create -d bridge network1`
     - `docker pull ankane/pgvector`
-    - `docker run --name pgvector-db -e POSTGRES_PASSWORD=test@123 -p 5432:5432 --network network1 ankane/pgvector`
+    - `docker run --name pgvector-db --rm -e POSTGRES_PASSWORD=test@123 -p 5432:5432 --network network1 ankane/pgvector`
 
 - Here your DB image is pulled and your container will be up and running with username postgres and password test@123 Now you need to configure it.
 - go to shell_scripts/db_setup/ and start this bash script configure_db.sh by 
