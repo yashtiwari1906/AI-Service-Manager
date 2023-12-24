@@ -15,7 +15,7 @@ spec:
         app: service-manager
     spec:
       containers:
-      
+
       - name: service-manager
         image: dracarys2000/service-manager:v1.1
         ports:
@@ -45,6 +45,6 @@ spec:
     app: service-manager
   ports:
     - protocol: TCP
-      port: 3000
+      port: 5050
       targetPort: 5050
       nodePort: 31111
