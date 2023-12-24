@@ -173,6 +173,12 @@ $~$
 
 ### :rocket: Deployment
 - you can go in the deployment folder to find the deployment file for the kubernetes deployment of the project.
+- Install minikube first and then just deploy every deployment file in it by:
+    `kubectl apply -f <file_name.yaml>`
+- Then type `minikube ip` this will be your IP and `31111` will be your port which is the nodeport for service-manager-service
+- so url in cluster based environment will be `http://<minikube_ip>:31111`
+- One thing to remember when your'e estabilishihng the communication between multiple pods try to make sure your'e calling with port not with targetPort or containerPort
+- In GKE cluster you've to deploy these `NodePort` as `LoadBalancer` so that you'll have an external IP and you'll call it through `port` not targetPort or NodePort
 
 $~$
 
