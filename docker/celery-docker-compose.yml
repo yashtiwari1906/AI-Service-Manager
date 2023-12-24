@@ -24,7 +24,7 @@ services:
     depends_on:
       - redis_message_broker 
     environment:
-      - NGROK_PORT=17696
+      - NGROK_PORT=17712
       - CELERY_BROKER_URL=redis://redis_message_broker:6379
       - CELERY_RESULT_BACKEND=redis://redis_message_broker:6379
       - EMAIL_ADDRESS=yashtiwari.media@gmail.com
@@ -42,13 +42,13 @@ services:
     depends_on:
       - redis_message_broker 
     environment:
-      - NGROK_PORT=17696
+      - NGROK_PORT=17712
       - CELERY_BROKER_URL=redis://redis_message_broker:6379
       - CELERY_RESULT_BACKEND=redis://redis_message_broker:6379
 
   detector:
     image: dracarys2000/face-detector:v1.1
-    container_name: detector
+    container_name: detector-service
     ports:
       - "5001:5001"
     networks:
@@ -56,7 +56,7 @@ services:
 
   verifier:
     image: dracarys2000/face-verifier:v1.1
-    container_name: verifier
+    container_name: verifier-service
     ports:
       - "4001:4001"
     networks:
