@@ -24,7 +24,7 @@
 
 - [About](#star2-About)
 - [Demo](#movie_camera-Demo)
-- [HLD](#fire-HLD)
+- [HLD](#fire-Functional-High-Level-Design)
 - [Set Up](#outbox_tray-Set-up)
 - [Contribute](#building_construction-Contribute)
 - [Deployment](#rocket-Deployment)  <!-- - [File Structure](#file_folder-File-Structure) -->
@@ -47,7 +47,7 @@
 
 
 $~$
-### :fire: HLD
+### :fire: Functional-High-Level-Design
 
 <p align="center">
     <!--     You can add your logo here -->
