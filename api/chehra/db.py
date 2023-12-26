@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.db import connection
-
+from ai_service_manager.tasks import insert_into_DB
 
 def my_custom_sql(request):
     with connection.cursor() as cursor:
@@ -14,20 +14,17 @@ class DBOperations:
     def __init__(self, table) -> None:
         self.table = table
 
-    def insert(self, data_dict):
+    def insert(self, data_dict, async_insert = True):
         # with connection.cursor() as cursor:
         #     cursor.execute("insert into embeddingsStorage (id, name, embedding) values (1000, 'check', '[1, 2, 3]');")
         try: 
-            column_names = list(data_dict.keys()) 
-            values = list(data_dict.values())
-            id, name, embedding = 'id', 'name', 'embedding'
-            query_str = f"insert into {self.table} ("+str(id)+','+str(name)+','+str(embedding)+f") values {tuple(values)}" #make a function and return a value
-            # try:
-            with connection.cursor() as cursor:
-                cursor.execute(query_str)
+            if async_insert:
+                insert_into_DB.delay(data_dict, self.table)
+            else: 
+                insert_into_DB(data_dict, self.table)
+
             return {"success": True, "msg": "Embeddings saved successfully."}
-            # except:
-            #     return False 
+           
 
         except Exception as e:
             raise Exception("Some error has occured during insertion check data_dict once", e)

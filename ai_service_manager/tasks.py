@@ -1,7 +1,7 @@
 from time import sleep
 import json 
 from celery import shared_task
-
+from django.db import connection
 import smtplib
 from email.message import EmailMessage
 
@@ -75,4 +75,14 @@ def send_feedback_email_task(msg):
     # )
 
 
-    
+@shared_task() 
+def insert_into_DB(data_dict, table):
+    column_names = list(data_dict.keys()) 
+    values = list(data_dict.values())
+    id, name, embedding = 'id', 'name', 'embedding'
+    query_str = f"insert into {table} ("+str(id)+','+str(name)+','+str(embedding)+f") values {tuple(values)}" #make a function and return a value
+    # try:
+    with connection.cursor() as cursor:
+        cursor.execute(query_str)
+
+    print(f"Item with id: {data_dict['id']} and name: {data_dict['name']} are saved successfully in the table {table}")
