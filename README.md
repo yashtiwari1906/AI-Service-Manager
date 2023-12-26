@@ -54,6 +54,7 @@ $~$
     <img src="static/hld-irywat.png" />
 </p>
 <p align="center">
+    
 ###  :outbox_tray: Set up
 - These are the steps required to install the project.
 - I have built this project on Ubuntu OS but I've not tried installing it in other OS but in that case you can go forward with docker installation.
