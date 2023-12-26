@@ -24,6 +24,7 @@
 
 - [About](#star2-About)
 - [Demo](#movie_camera-Demo)
+- [HLD](#fire-HLD)
 - [Set Up](#outbox_tray-Set-up)
 - [Contribute](#building_construction-Contribute)
 - [Deployment](#rocket-Deployment)  <!-- - [File Structure](#file_folder-File-Structure) -->
@@ -46,7 +47,13 @@
 
 
 $~$
+### :fire: HLD
 
+<p align="center">
+    <!--     You can add your logo here -->
+    <img src="static/hld-irywat.png" />
+</p>
+<p align="center">
 ###  :outbox_tray: Set up
 - These are the steps required to install the project.
 - I have built this project on Ubuntu OS but I've not tried installing it in other OS but in that case you can go forward with docker installation.
