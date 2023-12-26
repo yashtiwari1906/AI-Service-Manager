@@ -24,11 +24,11 @@ services:
     depends_on:
       - redis_message_broker 
     environment:
-      - NGROK_PORT=17712
+      - NGROK_PORT=<ngrok_port>
       - CELERY_BROKER_URL=redis://redis_message_broker:6379
       - CELERY_RESULT_BACKEND=redis://redis_message_broker:6379
-      - EMAIL_ADDRESS=yashtiwari.media@gmail.com
-      - EMAIL_PASSWORD=ayywnumoevjdnupd
+      - EMAIL_ADDRESS=<email>
+      - EMAIL_PASSWORD=<password>
 
   service_manager:
     image: dracarys2000/service-manager:v1.1
@@ -42,7 +42,7 @@ services:
     depends_on:
       - redis_message_broker 
     environment:
-      - NGROK_PORT=17712
+      - NGROK_PORT=<ngrok_port>
       - CELERY_BROKER_URL=redis://redis_message_broker:6379
       - CELERY_RESULT_BACKEND=redis://redis_message_broker:6379
 
